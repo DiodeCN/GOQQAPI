@@ -52,7 +52,7 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
                     Message string `json:"message"`
                 }{
                     GroupID: msg.GroupID,
-                    Message: "参数值",
+                    Message: "好好好",
                 },
                 Echo: 1,
             }
