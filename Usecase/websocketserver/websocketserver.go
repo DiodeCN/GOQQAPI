@@ -11,6 +11,30 @@ import (
 
 )
 
+func sendResponse(conn *websocket.Conn, groupID int64, message string) {
+	resp := struct {
+		Action string `json:"action"`
+		Params struct {
+			GroupID int64  `json:"group_id"`
+			Message string `json:"message"`
+		} `json:"params"`
+		Echo int `json:"echo"`
+	}{
+		Action: "send_group_msg",
+		Params: struct {
+			GroupID int64  `json:"group_id"`
+			Message string `json:"message"`
+		}{
+			GroupID: groupID,
+			Message: message,
+		},
+		Echo: 1,
+	}
+	if err := conn.WriteJSON(resp); err != nil {
+		fmt.Println("发送响应出错：", err)
+	}
+}
+
 func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 	conn, err := websocket.Upgrade(w, r, nil, 1024, 1024)
 	if err != nil {
@@ -37,32 +61,12 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		if msg.Message == "好好好" {
-			resp := struct {
-				Action string `json:"action"`
-				Params struct {
-					GroupID int64  `json:"group_id"`
-					Message string `json:"message"`
-				} `json:"params"`
-				Echo int `json:"echo"`
-			}{
-				Action: "send_group_msg",
-				Params: struct {
-					GroupID int64  `json:"group_id"`
-					Message string `json:"message"`
-				}{
-					GroupID: msg.GroupID,
-					Message: "好好好",
-				},
-				Echo: 1,
-			}
-			if err := conn.WriteJSON(resp); err != nil {
-				fmt.Println("发送响应出错：", err)
-			}
+			sendResponse(conn, msg.GroupID, "好好好")
 		}
 		if msg.Message == "佳乐能力" {
 			qq := int64(msg.UserID)
 			text := textgenerator.GenerateAbility(qq)
-			fmt.Println(text)
+			sendResponse(conn, msg.GroupID, text)
 		}
 	}
 }
