@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"Usecase/textgenerator"
-	"Usecase/websocketserver"
+	"github.com/DiodeCN/GOQQAPI/Usecase/textgenerator"
+	"github.com/DiodeCN/GOQQAPI/Usecase/websocketserver"
 )
 
 func main() {
