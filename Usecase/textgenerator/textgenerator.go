@@ -42,7 +42,7 @@ func GenerateAbility(qq int64) string {
 	defer mu.Unlock()
 
 	section := triggeredQQs.Section("Triggered")
-	key, err := section.GetKey(fmt.Sprintf("%d", qq))
+	_, err := section.GetKey(fmt.Sprintf("%d", qq))
 	if err == nil {
 		text = "111" + text
 	} else {
