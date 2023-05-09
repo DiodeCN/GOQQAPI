@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+    "math/rand"
+    "time"
 
 	"github.com/gorilla/websocket"
     "encoding/json"
@@ -78,10 +80,14 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 
 
 func main() {
+    qq := int64(12345678)
+	text := generateText(qq)
+	fmt.Println(text)
 	http.HandleFunc("/", handleWebSocket)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		fmt.Println("启动Web服务失败：", err)
 		return
 	}
+
 }
