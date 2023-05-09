@@ -59,5 +59,10 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 				fmt.Println("发送响应出错：", err)
 			}
 		}
+		if msg.Message == "佳乐能力" {
+			qq := int64(msg.UserID)
+			text := textgenerator.GenerateText(qq)
+			fmt.Println(text)
+		}
 	}
 }
