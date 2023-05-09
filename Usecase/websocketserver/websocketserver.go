@@ -6,6 +6,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+
+	"github.com/DiodeCN/GOQQAPI/Usecase/textgenerator"
+
 )
 
 func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
@@ -38,6 +41,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 				Params struct {
 					GroupID int64  `json:"group_id"`
 					Message string `json:"message"`
+					UserID  int64  `json:"user_id"`
 				} `json:"params"`
 				Echo int `json:"echo"`
 			}{

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func GenerateText(qq int64) string {
+func GenerateAbility(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
 	randomNumber := rand.Intn(7*7*7) // 7的三次方
