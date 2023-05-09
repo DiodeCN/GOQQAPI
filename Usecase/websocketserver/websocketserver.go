@@ -30,6 +30,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		var msg struct {
 			Message string `json:"message"`
 			GroupID int64  `json:"group_id"`
+			UserID  int64  `json:"user_id"`
 		}
 		if err := json.Unmarshal(message, &msg); err != nil {
 			fmt.Println("解析消息出错：", err)
@@ -41,7 +42,6 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 				Params struct {
 					GroupID int64  `json:"group_id"`
 					Message string `json:"message"`
-					UserID  int64  `json:"user_id"`
 				} `json:"params"`
 				Echo int `json:"echo"`
 			}{
