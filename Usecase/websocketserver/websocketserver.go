@@ -61,7 +61,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		}
 		if msg.Message == "佳乐能力" {
 			qq := int64(msg.UserID)
-			text := textgenerator.GenerateText(qq)
+			text := textgenerator.GenerateAbility(qq)
 			fmt.Println(text)
 		}
 	}
