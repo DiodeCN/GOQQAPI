@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"your_project_path/textgenerator"
-	"your_project_path/websocketserver"
+	"Usecase/textgenerator"
+	"Usecase/websocketserver"
 )
 
 func main() {
