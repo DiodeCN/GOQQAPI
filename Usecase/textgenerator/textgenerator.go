@@ -111,7 +111,7 @@ func GenerateMilitary(qq int64) string {
 	defer mu.Unlock()
 
 	section, _ := triggeredMilitary.NewSection(fmt.Sprintf("%d", qq))
-	section.NewKey("date", time.Now().Format("2006-06-28"))
+	section.NewKey("date", time.Now().Format("2006-01-02"))
 	section.NewKey("text", text)
 	triggeredMilitary.SaveTo("Military.ini")
 
