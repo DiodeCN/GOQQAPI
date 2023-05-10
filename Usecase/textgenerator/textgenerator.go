@@ -12,6 +12,7 @@ import (
 
 var (
 	triggeredQQs *ini.File
+	triggeredMilitary *ini.File
 	mu           sync.Mutex
 )
 
@@ -22,6 +23,16 @@ func init() {
 		if os.IsNotExist(err) {
 			triggeredQQs = ini.Empty()
 			triggeredQQs.SaveTo("Ability.ini")
+		} else {
+			panic(err)
+		}
+	}
+
+	triggeredMilitary, err = ini.Load("Military.ini")
+	if err != nil {
+		if os.IsNotExist(err) {
+			triggeredMilitary = ini.Empty()
+			triggeredMilitary.SaveTo("Military.ini")
 		} else {
 			panic(err)
 		}
@@ -41,15 +52,31 @@ func GenerateAbility(qq int64) string {
 	mu.Lock()
 	defer mu.Unlock()
 
-	section := triggeredQQs.Section("Triggered")
-	_, err := section.GetKey(fmt.Sprintf("%d", qq))
-	if err == nil {
-		text = "111" + text
-	} else {
-		section.NewKey(fmt.Sprintf("%d", qq), "")
-		triggeredQQs.SaveTo("Ability.ini")
-		text = "222" + text
-	}
+	section, _ := triggeredQQs.NewSection(fmt.Sprintf("%d", qq))
+	section.NewKey("date", time.Now().Format("2006-01-02"))
+	section.NewKey("text", text)
+	triggeredQQs.SaveTo("Ability.ini")
+
+	return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
+}
+
+func GenerateMilitary(qq int64) string {
+	seed := time.Now().UnixNano() + qq
+	rand.Seed(seed)
+	A := rand.Intn(7)
+	B := rand.Intn(7)
+	C := rand.Intn(7)
+	D := rand.Intn(7)
+
+	text := fmt.Sprintf("%d%d%d%d", A, B, C, D)
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	section, _ := triggeredMilitary.NewSection(fmt.Sprintf("%d", qq))
+	section.NewKey("date", time.Now().Format("2006-01-02"))
+	section.NewKey("text", text)
+	triggeredMilitary.SaveTo("Military.ini")
 
 	return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 }
