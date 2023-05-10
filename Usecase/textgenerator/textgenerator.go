@@ -74,6 +74,11 @@ func GenerateAbility(qq int64) string {
 	B := (randomNumber % 49) / 7
 	C := randomNumber % 7
 
+	text, err := ReadIni(qq, "Ability.ini")
+	if err == nil && text != "" {
+		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
+	}
+
 	text := fmt.Sprintf("%d%d%d", A, B, C)
 
 	mu.Lock()
@@ -83,6 +88,7 @@ func GenerateAbility(qq int64) string {
 	section.NewKey("date", time.Now().Format("2006-06-28"))
 	section.NewKey("text", text)
 	triggeredQQs.SaveTo("Ability.ini")
+
 
 	return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 }
@@ -94,6 +100,11 @@ func GenerateMilitary(qq int64) string {
 	B := rand.Intn(7)
 	C := rand.Intn(7)
 	D := rand.Intn(7)
+
+	text, err := ReadIni(qq, "Military.ini")
+	if err == nil && text != "" {
+		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
+	}
 
 	text := fmt.Sprintf("%d%d%d%d", A, B, C, D)
 
