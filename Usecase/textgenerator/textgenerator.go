@@ -69,10 +69,9 @@ func ReadIni(qq int64, filename string) (string, error) {
 func GenerateAbility(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
-	randomNumber := rand.Intn(7*7*7) // 7的三次方
-	A := randomNumber / 49
-	B := (randomNumber % 49) / 7
-	C := randomNumber % 7
+	A := rand.Intn(7)
+	B := rand.Intn(7)
+	C := rand.Intn(7)
 
 	text, err := ReadIni(qq, "Ability.ini")
 	if err == nil && text != "" {
