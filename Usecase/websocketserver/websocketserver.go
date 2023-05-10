@@ -72,7 +72,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		if msg.Message == "佳乐军事" {
 			qq := int64(msg.UserID)
 			text := textgenerator.GenerateMilitary(qq)
-			// sendResponse(conn, msg.GroupID, text)
+			sendResponse(conn, msg.GroupID, text)
 			log.Println(text)
 		}
 	}
