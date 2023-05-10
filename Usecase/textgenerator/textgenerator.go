@@ -60,7 +60,7 @@ func ReadIni(qq int64, filename string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		return "主人今天已经查过啦，[\r\n]"+ textKey.String(), nil
+		return textKey.String(), nil
 	}
 
 	return "", nil
