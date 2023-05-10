@@ -73,7 +73,7 @@ func GenerateAbility(qq int64) string {
 	B := rand.Intn(7)
 	C := rand.Intn(7)
 
-	text, err := ReadIni(qq, "Ability.ini")
+	text, err := "主人今天已经查过啦，[\r\n]" + ReadIni(qq, "Ability.ini")
 	if err == nil && text != "" {
 		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 	}
@@ -100,7 +100,7 @@ func GenerateMilitary(qq int64) string {
 	C := rand.Intn(7)
 	D := rand.Intn(7)
 
-	text, err := ReadIni(qq, "Military.ini")
+	text, err := "主人今天已经查过啦，[\r\n]" + ReadIni(qq, "Military.ini")
 	if err == nil && text != "" {
 		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 	}
