@@ -79,7 +79,7 @@ func GenerateAbility(qq int64) string {
 		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("%d%d%d", A, B, C)
+	text = fmt.Sprintf(A, B, C)
 
 	mu.Lock()
 	defer mu.Unlock()
@@ -106,7 +106,7 @@ func GenerateMilitary(qq int64) string {
 		return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("%d%d%d%d", A, B, C, D)
+	text = fmt.Sprintf(A, B, C, D)
 
 	mu.Lock()
 	defer mu.Unlock()
