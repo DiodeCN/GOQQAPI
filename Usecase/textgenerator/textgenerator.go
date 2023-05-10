@@ -47,7 +47,7 @@ func GenerateAbility(qq int64) string {
 		text = "111" + text
 	} else {
 		section.NewKey(fmt.Sprintf("%d", qq), "")
-		triggeredQQs.SaveTo("triggeredQQs.ini")
+		triggeredQQs.SaveTo("Ability.ini")
 		text = "222" + text
 	}
 
