@@ -21,7 +21,7 @@ func init() {
 	if err != nil {
 		if os.IsNotExist(err) {
 			triggeredQQs = ini.Empty()
-			triggeredQQs.SaveTo("triggeredQQs.ini")
+			triggeredQQs.SaveTo("Ability.ini")
 		} else {
 			panic(err)
 		}
