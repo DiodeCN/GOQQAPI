@@ -39,6 +39,33 @@ func init() {
 	}
 }
 
+func ReadIni(qq int64, filename string) (string, error) {
+	iniFile, err := ini.Load(filename)
+	if err != nil {
+		return "", err
+	}
+
+	section, err := iniFile.GetSection(fmt.Sprintf("%d", qq))
+	if err != nil {
+		return "", err
+	}
+
+	dateKey, err := section.GetKey("date")
+	if err != nil {
+		return "", err
+	}
+
+	if dateKey.String() == time.Now().Format("2006-06-28") {
+		textKey, err := section.GetKey("text")
+		if err != nil {
+			return "", err
+		}
+		return "111" + textKey.String(), nil
+	}
+
+	return "", nil
+}
+
 func GenerateAbility(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
