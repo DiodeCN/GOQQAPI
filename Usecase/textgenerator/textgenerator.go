@@ -17,7 +17,7 @@ var (
 
 func init() {
 	var err error
-	triggeredQQs, err = ini.Load("triggeredQQs.ini")
+	triggeredQQs, err = ini.Load("Ability.ini")
 	if err != nil {
 		if os.IsNotExist(err) {
 			triggeredQQs = ini.Empty()
