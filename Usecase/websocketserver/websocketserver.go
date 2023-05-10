@@ -3,6 +3,7 @@ package websocketserver
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -72,6 +73,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 			qq := int64(msg.UserID)
 			text := textgenerator.GenerateMilitary(qq)
 			// sendResponse(conn, msg.GroupID, text)
+			log.Println(text)
 		}
 	}
 }
