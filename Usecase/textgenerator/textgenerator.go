@@ -11,9 +11,9 @@ import (
 )
 
 var (
-	triggeredQQs *ini.File
+	triggeredQQs      *ini.File
 	triggeredMilitary *ini.File
-	mu           sync.Mutex
+	mu                sync.Mutex
 )
 
 func init() {
@@ -75,7 +75,7 @@ func GenerateAbility(qq int64) string {
 
 	text, err := ReadIni(qq, "Ability.ini")
 	if err == nil && text != "" {
-		return fmt.Sprintf("主人今天已经查过啦，\r\n" + "[CQ:at,qq=%d]%s", qq, text)
+		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
 	text = fmt.Sprintf("%d%d%d", A, B, C)
@@ -87,7 +87,6 @@ func GenerateAbility(qq int64) string {
 	section.NewKey("date", time.Now().Format("2006-01-02"))
 	section.NewKey("text", text)
 	triggeredQQs.SaveTo("Ability.ini")
-
 
 	return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 }
@@ -102,7 +101,7 @@ func GenerateMilitary(qq int64) string {
 
 	text, err := ReadIni(qq, "Military.ini")
 	if err == nil && text != "" {
-		return fmt.Sprintf("主人今天已经查过啦，\r\n" +"[CQ:at,qq=%d]%s", qq, text)
+		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
 	text = fmt.Sprintf("%d%d%d%d", A, B, C, D)
