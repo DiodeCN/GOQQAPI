@@ -69,16 +69,16 @@ func ReadIni(qq int64, filename string) (string, error) {
 func GenerateAbility(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
-	A := rand.Intn(7)
-	B := rand.Intn(7)
-	C := rand.Intn(7)
+	administrative := rand.Intn(7)
+	diplomatic := rand.Intn(7)
+	military := rand.Intn(7)
 
 	text, err := ReadIni(qq, "Ability.ini")
 	if err == nil && text != "" {
 		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("%d%d%d", A, B, C)
+	text = fmt.Sprintf("行政:%d 外交:%d 军事:%d", administrative, diplomatic, military)
 
 	mu.Lock()
 	defer mu.Unlock()
