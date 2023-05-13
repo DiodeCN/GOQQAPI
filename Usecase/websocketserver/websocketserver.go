@@ -36,7 +36,15 @@ func sendResponse(conn *websocket.Conn, groupID int64, message string) {
 }
 
 func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
-	conn, err := websocket.Upgrade(w, r, nil, 1024, 1024)
+	upgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+		CheckOrigin: func(r *http.Request) bool {
+			return true
+		},
+	}
+
+	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		fmt.Println("升级WebSocket连接失败：", err)
 		return
