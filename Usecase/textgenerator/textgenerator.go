@@ -78,7 +78,7 @@ func GenerateAbility(qq int64) string {
 		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("行政:%d 外交:%d 军事:%d", administrative, diplomatic, military)
+	text = fmt.Sprintf("行政：%d 外交：%d 军事：%d", administrative, diplomatic, military)
 
 	mu.Lock()
 	defer mu.Unlock()
