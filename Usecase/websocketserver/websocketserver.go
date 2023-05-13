@@ -72,7 +72,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if msg.MetaEventType == "heartbeat" {
-			fmt.Printf("?")
+			continue
 		} else {
 			fmt.Printf("收到消息：%s\n", message)
 		}
