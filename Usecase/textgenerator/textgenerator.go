@@ -104,7 +104,7 @@ func GenerateMilitary(qq int64) string {
 		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("火力:%d 冲击:%d 机动:%d 围城:%d", firepower, assault, mobility, siege)
+	text = fmt.Sprintf("火力：%d 冲击：%d 机动：%d 围城：%d", firepower, assault, mobility, siege)
 
 	mu.Lock()
 	defer mu.Unlock()
