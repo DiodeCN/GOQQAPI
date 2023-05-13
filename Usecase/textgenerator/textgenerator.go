@@ -94,17 +94,17 @@ func GenerateAbility(qq int64) string {
 func GenerateMilitary(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
-	A := rand.Intn(7)
-	B := rand.Intn(7)
-	C := rand.Intn(7)
-	D := rand.Intn(7)
+	firepower := rand.Intn(7)
+	assault := rand.Intn(7)
+	mobility := rand.Intn(7)
+	siege := rand.Intn(7)
 
 	text, err := ReadIni(qq, "Military.ini")
 	if err == nil && text != "" {
 		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
 	}
 
-	text = fmt.Sprintf("%d%d%d%d", A, B, C, D)
+	text = fmt.Sprintf("火力:%d 冲击:%d 机动:%d 围城:%d", firepower, assault, mobility, siege)
 
 	mu.Lock()
 	defer mu.Unlock()
