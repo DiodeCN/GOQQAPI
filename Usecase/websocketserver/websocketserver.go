@@ -63,6 +63,11 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("解析消息出错：", err)
 			continue
 		}
+
+		if msg.MetaEventType == "heartbeat" {
+			continue
+		}
+
 		if msg.Message == "好好好" {
 			sendResponse(conn, msg.GroupID, "好好好")
 		}
