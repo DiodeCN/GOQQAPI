@@ -49,7 +49,6 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("读取消息出错：", err)
 			return
 		}
-		fmt.Printf("收到消息：%s\n", message)
 
 		var msg struct {
 			Message       string `json:"message"`
@@ -66,6 +65,8 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 
 		if msg.MetaEventType == "heartbeat" {
 			continue
+		} else {
+			fmt.Printf("收到消息：%s\n", message)
 		}
 
 		if msg.Message == "好好好" {
