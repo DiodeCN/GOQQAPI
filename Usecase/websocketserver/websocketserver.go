@@ -9,7 +9,6 @@ import (
 	"github.com/gorilla/websocket"
 
 	"github.com/DiodeCN/GOQQAPI/Usecase/textgenerator"
-
 )
 
 func sendResponse(conn *websocket.Conn, groupID int64, message string) {
@@ -53,10 +52,13 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("收到消息：%s\n", message)
 
 		var msg struct {
-			Message string `json:"message"`
-			GroupID int64  `json:"group_id"`
-			UserID  int64  `json:"user_id"`
+			Message       string `json:"message"`
+			GroupID       int64  `json:"group_id"`
+			UserID        int64  `json:"user_id"`
+			PostType      string `json:"post_type,omitempty"`
+			MetaEventType string `json:"meta_event_type,omitempty"`
 		}
+
 		if err := json.Unmarshal(message, &msg); err != nil {
 			fmt.Println("解析消息出错：", err)
 			continue
