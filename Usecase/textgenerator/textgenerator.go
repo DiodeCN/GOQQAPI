@@ -66,6 +66,42 @@ func ReadIni(qq int64, filename string) (string, error) {
 	return "", nil
 }
 
+func GenerateGreeting(CC string) (string, error) {
+	titleIni, err := ini.Load("title.ini")
+	if err != nil {
+		return "", err
+	}
+
+	section, err := titleIni.GetSection(CC)
+	if err != nil {
+		return "", err
+	}
+
+	titleKey, err := section.GetKey("title")
+	if err != nil {
+		return "", err
+	}
+
+	AA := titleKey.String()
+
+	now := time.Now()
+	hour := now.Hour()
+	var BB string
+
+	switch {
+	case hour >= 5 && hour < 12:
+		BB = "早上"
+	case hour >= 12 && hour < 18:
+		BB = "下午"
+	case hour >= 18 && hour < 23:
+		BB = "晚上"
+	default:
+		BB = "深夜"
+	}
+
+	return fmt.Sprintf("%s【%s】好！", AA, BB), nil
+}
+
 func GenerateAbility(qq int64) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
