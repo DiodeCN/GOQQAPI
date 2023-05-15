@@ -112,7 +112,7 @@ func GenerateAbility(qq int64) string {
 
 	text, err := ReadIni(qq, "Ability.ini")
 	if err == nil && text != "" {
-		return fmt.Sprintf("主人今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", qq, text)
+		return fmt.Sprintf("%s今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", AA, qq, text)
 	}
 
 	text = fmt.Sprintf("行政：%d 外交：%d 军事：%d", administrative, diplomatic, military)
@@ -138,7 +138,7 @@ func GenerateMilitary(qq int64) string {
 
 	text, err := ReadIni(qq, "Military.ini")
 	if err == nil && text != "" {
-		return fmt.Sprintf("%s今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", "2", qq, text)
+		return fmt.Sprintf("%s今天已经查过啦，\r\n"+"[CQ:at,qq=%d]%s", AA, qq, text)
 	}
 
 	text = fmt.Sprintf("火力：%d 冲击：%d 机动：%d 围城：%d", firepower, assault, mobility, siege)
