@@ -102,7 +102,7 @@ func GenerateGreeting(CC string) (string, error) {
 	return fmt.Sprintf("%s【%s】好！", AA, BB), nil
 }
 
-func GenerateAbility(qq int64) string {
+func GenerateAbility(qq int64, AA string) string {
 
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
@@ -128,7 +128,7 @@ func GenerateAbility(qq int64) string {
 	return fmt.Sprintf("[CQ:at,qq=%d]%s", qq, text)
 }
 
-func GenerateMilitary(qq int64) string {
+func GenerateMilitary(qq int64, AA string) string {
 	seed := time.Now().UnixNano() + qq
 	rand.Seed(seed)
 	firepower := rand.Intn(7)

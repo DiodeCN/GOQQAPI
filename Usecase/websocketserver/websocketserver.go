@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	"gopkg.in/ini.v1"
 
 	"github.com/DiodeCN/GOQQAPI/Usecase/textgenerator"
 )
@@ -77,17 +78,39 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("收到消息：%s\n", message)
 		}
 
+		CC := fmt.Sprintf("%d", msg.UserID)
+
+		titleIni, err := ini.Load("title.ini")
+		if err != nil {
+			log.Println("加载 title.ini 出错：", err)
+			continue
+		}
+
+		section, err := titleIni.GetSection(CC)
+		if err != nil {
+			log.Println("获取 section 出错：", err)
+			continue
+		}
+
+		titleKey, err := section.GetKey("title")
+		if err != nil {
+			log.Println("获取 titleKey 出错：", err)
+			continue
+		}
+
+		AA := titleKey.String()
+
 		if msg.Message == "好好好" {
 			sendResponse(conn, msg.GroupID, "好好好")
 		}
 		if msg.Message == "佳乐能力" {
 			qq := int64(msg.UserID)
-			text := textgenerator.GenerateAbility(qq)
+			text := textgenerator.GenerateAbility(qq, AA)
 			sendResponse(conn, msg.GroupID, text)
 		}
 		if msg.Message == "佳乐军事" {
 			qq := int64(msg.UserID)
-			text := textgenerator.GenerateMilitary(qq)
+			text := textgenerator.GenerateMilitary(qq, AA)
 			sendResponse(conn, msg.GroupID, text)
 			log.Println(text)
 		}
